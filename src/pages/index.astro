@@ -1,0 +1,392 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { getPermalink } from '~/utils/permalinks';
+
+const contactHref = getPermalink('/contact');
+const WHATSAPP_NUMBER = '919344095727';
+const whatsappLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+
+const metadata = {
+  title: 'GlamBook — Online Salon Booking App for Your Salon Business',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Salon Booking, Simplified"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book a Free Demo',
+        href: contactHref,
+        icon: 'tabler:calendar-event',
+      },
+      {
+        text: 'Get Pricing on WhatsApp',
+        href: whatsappLink('Hi, I want salon booking app pricing for my salon'),
+        target: '_blank',
+        icon: 'tabler:brand-whatsapp',
+      },
+    ]}
+    image={{ src: '~/assets/images/hero-image.png', alt: 'GlamBook salon booking app on desktop and mobile' }}
+  >
+    <Fragment slot="title">
+      Stop losing clients to <span class="text-accent dark:text-white">missed calls</span> and double bookings
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="font-semibold">GlamBook</span> is a ready-to-launch salon booking website: a user app your clients
+      book from, and an admin panel that runs your stylists, slots and payments — live in days, not months.
+    </Fragment>
+  </Hero>
+
+  <!-- Problem -> Solution ************ -->
+
+  <Content
+    tagline="The Problem"
+    title="Manual booking is costing you clients and hours"
+    items={[
+      {
+        title: 'Phone tag & no-shows',
+        description: 'Clients call when you\'re mid-appointment, leave a voicemail, and book elsewhere instead.',
+      },
+      {
+        title: 'Double bookings',
+        description: 'Two clients, one chair, one very awkward conversation — a diary can\'t prevent overlaps.',
+      },
+      {
+        title: 'Zero visibility',
+        description: 'No easy way to see today\'s revenue, your busiest stylist, or which slots go empty every week.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1560066984-138dadb4c035?auto=format&fit=crop&w=1200&q=80',
+      alt: 'Busy salon reception desk',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">GlamBook fixes all three</h3>
+      Real-time slots, automatic conflict prevention, and a dashboard that shows you exactly how the salon is performing
+      — all from one system your clients can book into 24/7.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    id="features"
+    tagline="Features"
+    title="Everything a salon needs, in one system"
+    subtitle="Built for real salon operations — not a generic form builder."
+    items={[
+      {
+        title: 'Smart Slot Booking',
+        description:
+          'Clients pick a stylist, see live availability, and book instantly. Double-booking is prevented automatically.',
+        icon: 'tabler:calendar-check',
+      },
+      {
+        title: 'Stylist Profiles',
+        description:
+          'Photos, specialties, experience, pricing and working hours — clients choose the right stylist with confidence.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Secure Online Payments',
+        description: 'Stripe and Razorpay built in, with automated payment verification and status tracking.',
+        icon: 'tabler:credit-card',
+      },
+      {
+        title: 'Admin Dashboard',
+        description:
+          'Real-time stats on bookings, revenue and popular services, plus full control over stylists and services.',
+        icon: 'tabler:layout-dashboard',
+      },
+      {
+        title: 'Holiday & Slot Configuration',
+        description:
+          'Set opening hours, breaks, working days, recurring holidays and booking windows — all from the admin panel.',
+        icon: 'tabler:calendar-off',
+      },
+      {
+        title: 'Reschedule & Cancel Rules',
+        description:
+          'Clients can reschedule or cancel within rules you define, with slots released automatically.',
+        icon: 'tabler:refresh',
+      },
+    ]}
+  />
+
+  <!-- Content Widget: User App ****** -->
+
+  <Content
+    isReversed
+    tagline="User App"
+    title="A booking experience your clients will actually use"
+    items={[
+      { title: 'Browse stylists', description: 'Filter by specialty and real-time availability.' },
+      { title: 'Pick a slot in seconds', description: 'Interactive calendar shows only open time slots.' },
+      { title: 'Pay securely online', description: 'Stripe or Razorpay checkout, with instant confirmation.' },
+      { title: 'Manage their own bookings', description: 'View, reschedule or cancel appointments anytime.' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1522337660859-02fbefca4702?auto=format&fit=crop&w=1200&q=80',
+      alt: 'Client booking a salon appointment on a phone',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Client-facing, mobile-first</h3>
+      Fully responsive across mobile, tablet and desktop, with clear confirmations and friendly error handling at every
+      step.
+    </Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget: Admin Panel *** -->
+
+  <Content
+    isAfterContent
+    tagline="Admin Panel"
+    title="Run the whole salon from one dashboard"
+    items={[
+      { title: 'Stylist management', description: 'Add, edit or deactivate stylists and their availability.' },
+      { title: 'Appointment control', description: 'View, filter, cancel or mark appointments complete.' },
+      { title: 'Slot & holiday configuration', description: 'Set hours, breaks, working days and recurring closures.' },
+      { title: 'Analytics that matter', description: 'Revenue, booking trends and peak hours at a glance.' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',
+      alt: 'Admin dashboard analytics on a laptop screen',
+    }}
+  >
+    <Fragment slot="content">Complete control, without needing a developer on standby.</Fragment>
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Steps Widget: How it works **** -->
+
+  <Steps
+    id="how-it-works"
+    title="How booking works for your clients"
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Browse & choose</span>',
+        description: 'Client browses stylists by specialty and picks the one they want.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Pick a slot</span>',
+        description: 'Live calendar shows only real, available time slots — no back-and-forth.',
+        icon: 'tabler:calendar-time',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Pay & confirm</span>',
+        description: 'Secure checkout via Stripe or Razorpay, with instant confirmation.',
+        icon: 'tabler:credit-card',
+      },
+      {
+        title: 'Booked!',
+        description: 'Appointment appears in both the client app and your admin dashboard.',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1595476108010-b4d1f102af1d?auto=format&fit=crop&w=987&q=80',
+      alt: 'Hair stylist working with a client in a salon',
+    }}
+  />
+
+  <!-- Features2 Widget: USPs ******** -->
+
+  <Features2
+    title="Why salon owners choose GlamBook"
+    subtitle="The details that separate a real booking system from a generic form."
+    tagline="Why Us"
+    items={[
+      {
+        title: 'Double-Booking Prevention',
+        description: 'A robust slot-locking mechanism means two clients can never grab the same chair.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Flexible Holiday System',
+        description: 'Recurring holidays, one-time closures, and special working days — all configurable.',
+        icon: 'tabler:calendar-off',
+      },
+      {
+        title: 'Multi-Payment Gateway',
+        description: 'Stripe and Razorpay supported out of the box, so clients pay however they prefer.',
+        icon: 'tabler:credit-card-pay',
+      },
+      {
+        title: 'Granular Slot Control',
+        description: 'Configure slot duration, breaks, booking windows and minimum notice period.',
+        icon: 'tabler:adjustments',
+      },
+      {
+        title: 'Reschedule with Rules',
+        description: 'Time-based restrictions keep last-minute changes fair for your stylists.',
+        icon: 'tabler:clock-edit',
+      },
+      {
+        title: 'Secure by Design',
+        description: 'JWT authentication, encrypted passwords, and protected admin-only routes.',
+        icon: 'tabler:lock',
+      },
+      {
+        title: 'Fast & Responsive',
+        description: 'Mobile-first UI that loads quickly on any device your clients use.',
+        icon: 'tabler:device-mobile',
+      },
+      {
+        title: 'Built to Scale',
+        description: 'Modern architecture ready to grow from one chair to a multi-stylist salon.',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Live in Days',
+        description: 'Branding, services and pricing loaded in — your salon can go live fast.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <!-- Pricing Widget **************** -->
+
+  <Pricing
+    id="pricing"
+    tagline="Pricing"
+    title="Simple, transparent pricing"
+    subtitle="One-time or monthly — choose what works for your salon. Final pricing confirmed on a quick call."
+    prices={[
+      {
+        title: 'One-Time',
+        subtitle: 'Own it outright — pay once, no recurring fees',
+        price: 'Custom',
+        period: 'one-time setup fee',
+        items: [
+          { description: 'Full user app + admin panel' },
+          { description: 'Branding, services & pricing set up' },
+          { description: 'Hosting guidance included' },
+          { description: 'Free onboarding call' },
+        ],
+        callToAction: {
+          text: 'Get Pricing on WhatsApp',
+          href: whatsappLink('Hi, I want the One-Time plan pricing for my salon'),
+          target: '_blank',
+          icon: 'tabler:brand-whatsapp',
+        },
+      },
+      {
+        title: 'Monthly',
+        subtitle: 'Lower upfront cost, we manage updates & support',
+        price: 'Custom',
+        period: 'per month',
+        hasRibbon: true,
+        ribbonTitle: 'Popular',
+        items: [
+          { description: 'Full user app + admin panel' },
+          { description: 'Hosting & maintenance included' },
+          { description: 'Ongoing support & updates' },
+          { description: 'Cancel anytime' },
+        ],
+        callToAction: {
+          variant: 'primary',
+          text: 'Get Pricing on WhatsApp',
+          href: whatsappLink('Hi, I want the Monthly plan pricing for my salon'),
+          target: '_blank',
+          icon: 'tabler:brand-whatsapp',
+        },
+      },
+    ]}
+  />
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    id="faqs"
+    title="Frequently Asked Questions"
+    subtitle="Everything salon owners ask us before getting started."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      {
+        title: 'How long does setup take?',
+        description:
+          'Most salons are live within a few days of confirming your branding, services and stylist details — no long development cycle.',
+      },
+      {
+        title: 'Do I need any technical knowledge?',
+        description:
+          'No. The admin panel is built for salon owners, not developers — adding stylists, setting slots and viewing bookings all happen through simple screens.',
+      },
+      {
+        title: 'What payment methods can my clients use?',
+        description: 'Stripe and Razorpay are built in, so clients can pay by card or other supported local methods.',
+      },
+      {
+        title: "What's the difference between One-Time and Monthly?",
+        description:
+          'One-Time is a single setup fee with no recurring cost. Monthly spreads the cost over time and includes ongoing hosting, support and updates.',
+      },
+      {
+        title: 'Can I customize services, pricing and working hours?',
+        description:
+          'Yes — services, pricing, stylist working hours, holidays and booking rules are all configurable from your admin panel.',
+      },
+      {
+        title: 'What if I run more than one salon?',
+        description:
+          "We're building multi-location support — get in touch and we'll let you know as soon as it's ready for your account.",
+      },
+    ]}
+  />
+
+  <!-- Coming Soon teaser ************ -->
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get Pricing on WhatsApp',
+        href: whatsappLink('Hi, I want salon booking app pricing for my city'),
+        target: '_blank',
+        icon: 'tabler:brand-whatsapp',
+      },
+      {
+        text: 'Book a Free Demo',
+        href: contactHref,
+        icon: 'tabler:calendar-event',
+      },
+    ]}
+  >
+    <Fragment slot="title">Ready to stop losing bookings to missed calls?</Fragment>
+    <Fragment slot="subtitle">
+      See GlamBook live on your own branding in a free 15-minute demo. <br class="hidden md:inline" />
+      <span class="font-semibold">Coming soon:</span> one app to find and book any salon near you.
+    </Fragment>
+  </CallToAction>
+</Layout>
