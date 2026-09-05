@@ -9,14 +9,18 @@ import Steps from '~/components/widgets/Steps.astro';
 import Pricing from '~/components/widgets/Pricing.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import DemoVideo from '~/components/widgets/DemoVideo.astro';
 import { getPermalink } from '~/utils/permalinks';
 
 const contactHref = getPermalink('/contact');
 const WHATSAPP_NUMBER = '919344095727';
 const whatsappLink = (message: string) => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 
+// Pricing isn't locked yet — flip to true once the plan sheet is confirmed.
+const SHOW_PRICING = false;
+
 const metadata = {
-  title: 'GlamBook — Online Salon Booking App for Your Salon Business',
+  title: 'StyleSlot — Online Salon Booking App for Your Salon Business',
   ignoreTitleTemplate: true,
 };
 ---
@@ -40,14 +44,17 @@ const metadata = {
         icon: 'tabler:brand-whatsapp',
       },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'GlamBook salon booking app on desktop and mobile' }}
+    image={{
+      src: 'https://images.unsplash.com/photo-1633681926022-84c23e8cb2d6?auto=format&fit=crop&w=1200&q=80',
+      alt: 'StyleSlot salon booking app on desktop and mobile',
+    }}
   >
     <Fragment slot="title">
       Stop losing clients to <span class="text-accent dark:text-white">missed calls</span> and double bookings
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="font-semibold">GlamBook</span> is a ready-to-launch salon booking website: a user app your clients
+      <span class="font-semibold">StyleSlot</span> is a ready-to-launch salon booking website: a user app your clients
       book from, and an admin panel that runs your stylists, slots and payments — live in days, not months.
     </Fragment>
   </Hero>
@@ -77,7 +84,7 @@ const metadata = {
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">GlamBook fixes all three</h3>
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">StyleSlot fixes all three</h3>
       Real-time slots, automatic conflict prevention, and a dashboard that shows you exactly how the salon is performing
       — all from one system your clients can book into 24/7.
     </Fragment>
@@ -215,10 +222,19 @@ const metadata = {
     }}
   />
 
+  <!-- Demo Video Widget ************* -->
+
+  <DemoVideo
+    id="demo"
+    tagline="See It In Action"
+    title="Watch StyleSlot run a real salon"
+    subtitle="One walkthrough covering both sides: the client booking app and the admin panel behind it."
+  />
+
   <!-- Features2 Widget: USPs ******** -->
 
   <Features2
-    title="Why salon owners choose GlamBook"
+    title="Why salon owners choose StyleSlot"
     subtitle="The details that separate a real booking system from a generic form."
     tagline="Why Us"
     items={[
@@ -275,54 +291,57 @@ const metadata = {
   </Features2>
 
   <!-- Pricing Widget **************** -->
+  <!-- Commented out until pricing is locked — flip SHOW_PRICING to true to bring it back. -->
 
-  <Pricing
-    id="pricing"
-    tagline="Pricing"
-    title="Simple, transparent pricing"
-    subtitle="One-time or monthly — choose what works for your salon. Final pricing confirmed on a quick call."
-    prices={[
-      {
-        title: 'One-Time',
-        subtitle: 'Own it outright — pay once, no recurring fees',
-        price: 'Custom',
-        period: 'one-time setup fee',
-        items: [
-          { description: 'Full user app + admin panel' },
-          { description: 'Branding, services & pricing set up' },
-          { description: 'Hosting guidance included' },
-          { description: 'Free onboarding call' },
-        ],
-        callToAction: {
-          text: 'Get Pricing on WhatsApp',
-          href: whatsappLink('Hi, I want the One-Time plan pricing for my salon'),
-          target: '_blank',
-          icon: 'tabler:brand-whatsapp',
+  {SHOW_PRICING && (
+    <Pricing
+      id="pricing"
+      tagline="Pricing"
+      title="Simple, transparent pricing"
+      subtitle="One-time or monthly — choose what works for your salon. Final pricing confirmed on a quick call."
+      prices={[
+        {
+          title: 'One-Time',
+          subtitle: 'Own it outright — pay once, no recurring fees',
+          price: 'Custom',
+          period: 'one-time setup fee',
+          items: [
+            { description: 'Full user app + admin panel' },
+            { description: 'Branding, services & pricing set up' },
+            { description: 'Hosting guidance included' },
+            { description: 'Free onboarding call' },
+          ],
+          callToAction: {
+            text: 'Get Pricing on WhatsApp',
+            href: whatsappLink('Hi, I want the One-Time plan pricing for my salon'),
+            target: '_blank',
+            icon: 'tabler:brand-whatsapp',
+          },
         },
-      },
-      {
-        title: 'Monthly',
-        subtitle: 'Lower upfront cost, we manage updates & support',
-        price: 'Custom',
-        period: 'per month',
-        hasRibbon: true,
-        ribbonTitle: 'Popular',
-        items: [
-          { description: 'Full user app + admin panel' },
-          { description: 'Hosting & maintenance included' },
-          { description: 'Ongoing support & updates' },
-          { description: 'Cancel anytime' },
-        ],
-        callToAction: {
-          variant: 'primary',
-          text: 'Get Pricing on WhatsApp',
-          href: whatsappLink('Hi, I want the Monthly plan pricing for my salon'),
-          target: '_blank',
-          icon: 'tabler:brand-whatsapp',
+        {
+          title: 'Monthly',
+          subtitle: 'Lower upfront cost, we manage updates & support',
+          price: 'Custom',
+          period: 'per month',
+          hasRibbon: true,
+          ribbonTitle: 'Popular',
+          items: [
+            { description: 'Full user app + admin panel' },
+            { description: 'Hosting & maintenance included' },
+            { description: 'Ongoing support & updates' },
+            { description: 'Cancel anytime' },
+          ],
+          callToAction: {
+            variant: 'primary',
+            text: 'Get Pricing on WhatsApp',
+            href: whatsappLink('Hi, I want the Monthly plan pricing for my salon'),
+            target: '_blank',
+            icon: 'tabler:brand-whatsapp',
+          },
         },
-      },
-    ]}
-  />
+      ]}
+    />
+  )}
 
   <!-- FAQs Widget ******************* -->
 
@@ -385,7 +404,7 @@ const metadata = {
   >
     <Fragment slot="title">Ready to stop losing bookings to missed calls?</Fragment>
     <Fragment slot="subtitle">
-      See GlamBook live on your own branding in a free 15-minute demo. <br class="hidden md:inline" />
+      See StyleSlot live on your own branding in a free 15-minute demo. <br class="hidden md:inline" />
       <span class="font-semibold">Coming soon:</span> one app to find and book any salon near you.
     </Fragment>
   </CallToAction>

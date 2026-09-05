@@ -1,0 +1,44 @@
+---
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { Widget } from '~/types';
+
+interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+}
+
+const { title = '', subtitle = '', tagline = '', id, isDark = false, classes = {} } = Astro.props;
+
+const cloudName = import.meta.env.PUBLIC_CLOUDINARY_CLOUD_NAME;
+const publicId = import.meta.env.PUBLIC_CLOUDINARY_VIDEO_ID;
+
+const videoSrc = cloudName && publicId ? `https://res.cloudinary.com/${cloudName}/video/upload/${publicId}.mp4` : null;
+const posterSrc =
+  cloudName && publicId
+    ? `https://res.cloudinary.com/${cloudName}/video/upload/so_0/${publicId}.jpg`
+    : undefined;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl mx-auto ${classes?.container ?? ''}`}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  <div class="rounded-lg overflow-hidden shadow-xl border border-gray-200 dark:border-slate-700 bg-black">
+    {
+      videoSrc ? (
+        <video class="w-full aspect-video" controls preload="metadata" poster={posterSrc}>
+          <source src={videoSrc} type="video/mp4" />
+          Your browser doesn't support embedded video. <a href={videoSrc}>Download the demo instead</a>.
+        </video>
+      ) : (
+        <div class="w-full aspect-video flex items-center justify-center text-center text-slate-300 p-8">
+          <p>
+            Demo video coming soon. Set <code class="text-slate-100">PUBLIC_CLOUDINARY_CLOUD_NAME</code> and{' '}
+            <code class="text-slate-100">PUBLIC_CLOUDINARY_VIDEO_ID</code> in <code class="text-slate-100">.env</code> once
+            it's uploaded to Cloudinary.
+          </p>
+        </div>
+      )
+    }
+  </div>
+</WidgetWrapper>

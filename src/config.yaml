@@ -1,5 +1,5 @@
 site:
-  name: GlamBook
+  name: StyleSlot
   site: 'https://glambook-salon.vercel.app'
   base: '/'
   trailingSlash: false
@@ -9,14 +9,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: 'GlamBook — Salon Booking App by BuildMyWeb'
-    template: '%s — GlamBook'
+    default: 'StyleSlot — Salon Booking App by BuildMyWeb'
+    template: '%s — StyleSlot'
   description: 'A complete salon booking platform with online appointments, stylist management and an admin dashboard. Built and deployed by BuildMyWeb.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: GlamBook
+    site_name: StyleSlot
     images:
       - url: '~/assets/images/default.png'
         width: 1200
